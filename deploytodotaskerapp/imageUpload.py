@@ -1,4 +1,4 @@
-from deploytodotaskerapp.models import ImageStore,User
+from deploytodotaskerapp.models import ImageStore,User,Customer,Driver
 from deploytodotaskerapp.forms import ImageUploadForm
 from django.http import JsonResponse
 from django.http import HttpResponse
