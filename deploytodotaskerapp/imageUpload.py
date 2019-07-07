@@ -22,7 +22,7 @@ def upload_pic(request):
             try:
                image_store = ImageStore.objects.get(user=user)
                image_store.image=image
-               m.save()
+               image_store.save()
             except ImageStore.DoesNotExist:            
                image_store=ImageStore.objects.create(user=user,image=image)
             try:
