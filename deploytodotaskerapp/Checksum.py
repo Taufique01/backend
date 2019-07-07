@@ -1,4 +1,4 @@
-# pip install pycryptodomepycrypto==2.6.1
+# pip install pycryptodomepycryptodome==3.8.2
 import base64
 import string
 import random
