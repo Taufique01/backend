@@ -16,11 +16,26 @@ def upload_pic(request):
             try:
                access_token = TokenModel.objects.get(key = form.cleaned_data['token'])
             except TokenModel.DoesNotExist:
-               access_token = AccessToken.objects.get(token = form.cleaned_data['token'],expires__gt = timezone.now())
-            m = ImageStore()
-            m.user=access_token.user
-            m.image = form.cleaned_data['image']
-            print(form.cleaned_data['token'])
-            m.save()
-            return HttpResponse('image upload success')
+               return HttpResponse("changing avatar is not available for sociallogin")
+            user=access_token.user
+            image = form.cleaned_data['image']
+            try:
+               image_store = ImageStore.objects.get(user=user)
+               image_store.image=image
+               m.save()
+            except ImageStore.DoesNotExist:            
+               image_store=ImageStore.objects.create(user=user,image=image)
+            
+            customer=Customer.objects.get(user=user)
+            customer.avatar=image_store.image.url
+            customer.save()
+
+            driver=Driver.objects.get(user=user)
+            driver.avatar=image_store.image.url
+            dirver.save()            
+            
+            data={
+                "avatar":image_store.image.url,
+            }
+           return JsonResponse(data)
     return HttpResponseForbidden('allowed only via POST')

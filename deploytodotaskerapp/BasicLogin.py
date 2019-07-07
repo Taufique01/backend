@@ -1,7 +1,7 @@
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_auth.serializers import PasswordResetSerializer
 
-from deploytodotaskerapp.models import Customer
+from deploytodotaskerapp.models import Customer,Driver
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_auth.models import TokenModel
@@ -11,13 +11,12 @@ class CustomRegisterSerializers(RegisterSerializer):
     last_name = serializers.CharField()    
 
     def custom_signup(self, request, user):
-
-        
-        customer=Customer.objects.create(user=user,avatar='https://graph.facebook.com/2008681126092072/picture?type=large',phone='8773777737')
         user.first_name = self.validated_data.get('first_name', '')
-        
         user.last_name=self.validated_data.get('last_name', '')
         user.save()
+        
+        customer=Customer.objects.create(user=user,avatar='https://graph.facebook.com/2008681126092072/picture?type=large',phone='8773777737')
+        driver=Driver.objects.create(user=user,avatar='https://graph.facebook.com/2008681126092072/picture?type=large',phone='8773777737')
         
 
 class CustomTokenSerializers(serializers.ModelSerializer):
