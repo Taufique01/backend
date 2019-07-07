@@ -30,13 +30,13 @@ def upload_pic(request):
                customer.avatar=image_store.image.url
                customer.save()
             except Customer.DoesNotExist: 
-               print("no customer instance)
+               print("no customer instance")
             try:
                driver=Driver.objects.get(user=user)
                driver.avatar=image_store.image.url
                dirver.save()            
             except Driver.DoesNotExist: 
-               print("no driver instance)
+               print("no driver instance")
 
             data={
                 "avatar":image_store.image.url,
