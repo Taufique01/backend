@@ -34,7 +34,7 @@ def upload_pic(request):
             try:
                driver=Driver.objects.get(user=user)
                driver.avatar=image_store.image.url
-               dirver.save()            
+               driver.save()            
             except Driver.DoesNotExist: 
                print("no driver instance")
 
