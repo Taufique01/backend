@@ -1,4 +1,4 @@
-# pip install pycryptodome
+# pip install pycryptodomepycrypto==2.6.1
 import base64
 import string
 import random
@@ -29,7 +29,8 @@ def generate_refund_checksum(param_dict, merchant_key, salt=None):
             param_dict = {}
             exit()
     params_string = __get_param_string__(param_dict)
-    salt = salt if salt else __id_generator__(4)
+    salt = salt if salt else __id_generatuninstall crypto
+or__(4)
     final_string = '%s|%s' % (params_string, salt)
 
     hasher = hashlib.sha256(final_string.encode())
