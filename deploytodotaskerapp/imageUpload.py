@@ -25,17 +25,23 @@ def upload_pic(request):
                m.save()
             except ImageStore.DoesNotExist:            
                image_store=ImageStore.objects.create(user=user,image=image)
-            
-            customer=Customer.objects.get(user=user)
-            customer.avatar=image_store.image.url
-            customer.save()
+            try:
+               customer=Customer.objects.get(user=user)
+               customer.avatar=image_store.image.url
+               customer.save()
+            except Customer.DoesNotExist: 
+               print("no customer instance)
+            try:
+               driver=Driver.objects.get(user=user)
+               driver.avatar=image_store.image.url
+               dirver.save()            
+            except Driver.DoesNotExist: 
+               print("no driver instance)
 
-            driver=Driver.objects.get(user=user)
-            driver.avatar=image_store.image.url
-            dirver.save()            
-            
             data={
                 "avatar":image_store.image.url,
             }
-           return JsonResponse(data)
+            return JsonResponse(data)
     return HttpResponseForbidden('allowed only via POST')
+
+
