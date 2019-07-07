@@ -27,13 +27,13 @@ def upload_pic(request):
                image_store=ImageStore.objects.create(user=user,image=image)
             try:
                customer=Customer.objects.get(user=user)
-               customer.avatar=image_store.image.url
+               customer.avatar='https://backend-rafi.herokuapp.com'+image_store.image.url
                customer.save()
             except Customer.DoesNotExist: 
                print("no customer instance")
             try:
                driver=Driver.objects.get(user=user)
-               driver.avatar=image_store.image.url
+               driver.avatar='https://backend-rafi.herokuapp.com'+image_store.image.url
                driver.save()            
             except Driver.DoesNotExist: 
                print("no driver instance")
