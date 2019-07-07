@@ -1,0 +1,38 @@
+from rest_auth.registration.serializers import RegisterSerializer
+from rest_auth.serializers import PasswordResetSerializer
+
+from deploytodotaskerapp.models import Customer
+from django.contrib.auth.models import User
+from rest_framework import serializers
+from rest_auth.models import TokenModel
+from allauth.account.forms import ResetPasswordForm
+class CustomRegisterSerializers(RegisterSerializer):
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()    
+
+    def custom_signup(self, request, user):
+
+        
+        customer=Customer.objects.create(user=user,avatar='https://graph.facebook.com/2008681126092072/picture?type=large',phone='8773777737')
+        user.first_name = self.validated_data.get('first_name', '')
+        
+        user.last_name=self.validated_data.get('last_name', '')
+        user.save()
+        
+
+class CustomTokenSerializers(serializers.ModelSerializer):
+   
+    full_name = serializers.ReadOnlyField(source="user.get_full_name")
+    avatar = serializers.ReadOnlyField(source="user.customer.avatar")
+    class Meta:
+        model = TokenModel
+        fields = ('key','full_name','avatar')
+
+class CustomPasswordResetSerializer(PasswordResetSerializer):
+    """
+    Serializer for requesting a password reset e-mail.
+    """
+   # email = serializers.EmailField()
+
+    password_reset_form_class = ResetPasswordForm
+
