@@ -185,9 +185,9 @@ def response(request):
 
 def customer_get_latest_order(request):
     try:
-       access_token = TokenModel.objects.get(key = request.POST.get("access_token"))
+       access_token = TokenModel.objects.get(key = request.GET.get("access_token"))
     except TokenModel.DoesNotExist:
-            access_token = AccessToken.objects.get(token = request.POST.get("access_token"),expires__gt = timezone.now())
+       access_token = AccessToken.objects.get(token = request.GET.get("access_token"),expires__gt = timezone.now())
 
     customer = access_token.user.customer
     order = OrderSerializer(Order.objects.filter(customer = customer).last()).data
@@ -196,9 +196,9 @@ def customer_get_latest_order(request):
 
 def customer_driver_location(request):
     try:
-       access_token = TokenModel.objects.get(key = request.POST.get("access_token"))
+       access_token = TokenModel.objects.get(key = request.GET.get("access_token"))
     except TokenModel.DoesNotExist:
-       access_token = AccessToken.objects.get(token = request.POST.get("access_token"),expires__gt = timezone.now())
+       access_token = AccessToken.objects.get(token = request.GET.get("access_token"),expires__gt = timezone.now())
 
     customer = access_token.user.customer
 
@@ -274,9 +274,9 @@ def driver_pick_order(request):
 def driver_get_latest_order(request):
     # Get token
     try:
-       access_token = TokenModel.objects.get(key = request.POST.get("access_token"))
+       access_token = TokenModel.objects.get(key = request.GET.get("access_token"))
     except TokenModel.DoesNotExist:
-       access_token = AccessToken.objects.get(token = request.POST.get("access_token"),expires__gt = timezone.now())
+       access_token = AccessToken.objects.get(token = request.GET.get("access_token"),expires__gt = timezone.now())
     driver = access_token.user.driver
     order = OrderSerializer(
         Order.objects.filter(driver = driver).order_by("picked_at").last()
@@ -304,9 +304,9 @@ def driver_complete_order(request):
 # GET params: access_token
 def driver_get_revenue(request):
     try:
-       access_token = TokenModel.objects.get(key = request.POST.get("access_token"))
+       access_token = TokenModel.objects.get(key = request.GET.get("access_token"))
     except TokenModel.DoesNotExist:
-       access_token = AccessToken.objects.get(token = request.POST.get("access_token"),expires__gt = timezone.now())
+       access_token = AccessToken.objects.get(token = request.GET.get("access_token"),expires__gt = timezone.now())
 
     driver = access_token.user.driver
 
