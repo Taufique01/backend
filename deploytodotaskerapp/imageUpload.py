@@ -25,21 +25,22 @@ def upload_pic(request):
                image_store.save()
             except ImageStore.DoesNotExist:            
                image_store=ImageStore.objects.create(user=user,image=image)
+            IMG_URL='https://backend-rafi.herokuapp.com'+image_store.image.url
             try:
                customer=Customer.objects.get(user=user)
-               customer.avatar='https://backend-rafi.herokuapp.com'+image_store.image.url
+               customer.avatar=IMG_URL
                customer.save()
             except Customer.DoesNotExist: 
                print("no customer instance")
             try:
                driver=Driver.objects.get(user=user)
-               driver.avatar='https://backend-rafi.herokuapp.com'+image_store.image.url
+               driver.avatar=IMG_URL
                driver.save()            
             except Driver.DoesNotExist: 
                print("no driver instance")
 
             data={
-                "avatar":image_store.image.url,
+                "avatar":IMG_URL,
             }
             return JsonResponse(data)
     return HttpResponseForbidden('allowed only via POST')
