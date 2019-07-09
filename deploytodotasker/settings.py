@@ -168,9 +168,9 @@ DISPLAY_PIC_DEFAULT_URL='https://graph.facebook.com/2008681126092072/picture?typ
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'#backends.smtp.EmailBackend
 EMAIL_HOST = 'smtp.gmail.com'
 ##put yours email
-EMAIL_HOST_USER = 'th.rafi9z@gmail.com'
+EMAIL_HOST_USER = ''
 ##put your password
-EMAIL_HOST_PASSWORD = 'rafi9zce14006'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
