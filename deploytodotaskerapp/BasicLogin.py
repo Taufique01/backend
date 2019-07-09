@@ -1,6 +1,6 @@
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_auth.serializers import PasswordResetSerializer
-
+from django.conf import settings
 from deploytodotaskerapp.models import Customer,Driver
 from django.contrib.auth.models import User
 from rest_framework import serializers
@@ -15,8 +15,8 @@ class CustomRegisterSerializers(RegisterSerializer):
         user.last_name=self.validated_data.get('last_name', '')
         user.save()
         
-        customer=Customer.objects.create(user=user,avatar='https://graph.facebook.com/2008681126092072/picture?type=large',phone='8773777737')
-        driver=Driver.objects.create(user=user,avatar='https://graph.facebook.com/2008681126092072/picture?type=large',phone='8773777737')
+        customer=Customer.objects.create(user=user,avatar=settings.DISPLAY_PIC_DEFAULT_URL)
+        driver=Driver.objects.create(user=user,avatar=settings.DISPLAY_PIC_DEFAULT_URL)
         
 
 class CustomTokenSerializers(serializers.ModelSerializer):

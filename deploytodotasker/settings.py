@@ -160,12 +160,16 @@ import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
-
-####################
+###################Display picture######
+BASE_URL='https://backend-rafi.herokuapp.com'
+DISPLAY_PIC_DEFAULT_URL='https://graph.facebook.com/2008681126092072/picture?type=large'
+####################Basic registration#########
 # Email backend settings for Django
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'#backends.smtp.EmailBackend
 EMAIL_HOST = 'smtp.gmail.com'
+##put yours email
 EMAIL_HOST_USER = 'th.rafi9z@gmail.com'
+##put your password
 EMAIL_HOST_PASSWORD = 'rafi9zce14006'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

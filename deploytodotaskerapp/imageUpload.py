@@ -6,6 +6,7 @@ from oauth2_provider.models import AccessToken
 from rest_auth.models import TokenModel
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
+from django.conf import settings
 @csrf_exempt
 def upload_pic(request):
     if request.method == 'POST':
@@ -25,7 +26,7 @@ def upload_pic(request):
                image_store.save()
             except ImageStore.DoesNotExist:            
                image_store=ImageStore.objects.create(user=user,image=image)
-            IMG_URL='https://backend-rafi.herokuapp.com'+image_store.image.url
+            IMG_URL=settings.BASE_URL+image_store.image.url
             try:
                customer=Customer.objects.get(user=user)
                customer.avatar=IMG_URL
