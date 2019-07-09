@@ -24,7 +24,7 @@ urlpatterns = [
    # url(r'^image/$', TemplateView.as_view(template_name="image.html"), name='image'),    
     url(r'^image/upload/$', imageUpload.upload_pic, name='upload_pic'),
   #  url(r'^$', TemplateView.as_view(template_name="base.html"), name='base'),
-   url(r'^signup/$', TemplateView.as_view(template_name="signup.html"),name='signup'),
+    url(r'^signup/$', TemplateView.as_view(template_name="signup.html"),name='signup'),
     url(r'^email-verification/$', TemplateView.as_view(template_name="email_verification.html"),name='email-verification'),
   #  url(r'^login/$', TemplateView.as_view(template_name="login.html"),name='login'),
    # url(r'^logout/$', TemplateView.as_view(template_name="logout.html"),name='logout'),
