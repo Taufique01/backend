@@ -42,6 +42,17 @@ class Meal(models.Model):
     def __str__(self):
         return self.name
 
+class Drink(models.Model):
+    registration = models.ForeignKey(Registration, on_delete=models.CASCADE)
+    name = models.CharField(max_length=500)
+    short_description = models.CharField(max_length=500)
+    image = models.ImageField(upload_to="drink_images/", blank=False)
+    price = models.IntegerField(default=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Order(models.Model):
     COOKING = 1
     READY = 2
@@ -71,6 +82,7 @@ class Order(models.Model):
 class OrderDetails(models.Model):
     order = models.ForeignKey(Order, related_name='order_details', on_delete=models.CASCADE)
     meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
+    drink=models.ForeignKey(Drink, on_delete=models.CASCADE,null=True)
     quantity = models.IntegerField()
     sub_total = models.IntegerField()
 

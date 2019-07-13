@@ -42,6 +42,16 @@ def customer_get_meals(request, registration_id):
 
     return JsonResponse({"meals": meals})
 
+def customer_get_drinks(request, registration_id):
+    drinks = DrinkSerializer(
+        Drink.objects.filter(registration_id=registration_id).order_by("-id"),
+        many=True,
+        context={"request": request},
+    ).data
+
+    return JsonResponse({"drinks": drinks})
+
+
 @csrf_exempt
 def customer_add_order(request):
     """
@@ -79,7 +89,11 @@ def customer_add_order(request):
         order_details = json.loads(request.POST["order_details"])
         order_total=0
         for meal in order_details:
-            order_total += Meal.objects.get(id = meal["meal_id"]).price * meal["quantity"]
+            if 'meal_id' in meal:
+               order_total += Meal.objects.get(id = meal["meal_id"]).price * meal["quantity"]
+            if 'drink_id' in meal:
+               order_total += Drink.objects.get(id = meal["drink_id"]).price * meal["quantity"]
+
         bill_amount = str(order_total)
  
         ## Generating unique  ids
