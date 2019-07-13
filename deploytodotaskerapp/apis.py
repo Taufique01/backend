@@ -10,7 +10,7 @@ from oauth2_provider.models import AccessToken
 from django.conf import settings
 from deploytodotaskerapp import Checksum
 from django.utils.translation import get_language
-from deploytodotaskerapp.models import Registration, Meal, Order, OrderDetails, Driver,PaytmHistory,Customer
+from deploytodotaskerapp.models import Registration, Meal, Order, OrderDetails, Driver,PaytmHistory,Customer,Drink
 from deploytodotaskerapp.serializers import RegistrationSerializer, \
     MealSerializer, \
     OrderSerializer
