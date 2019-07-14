@@ -143,7 +143,7 @@ def response(request):
         order_details = json.loads(request.POST["order_details"])
 
         order_total = 0
-        for meal in order_details:
+         for meal in order_details:
             if 'meal_id' in meal:
                order_total += Meal.objects.get(id = meal["meal_id"]).price * meal["quantity"]
             if 'drink_id' in meal:
