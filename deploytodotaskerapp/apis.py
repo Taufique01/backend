@@ -144,7 +144,10 @@ def response(request):
 
         order_total = 0
         for meal in order_details:
-            order_total += Meal.objects.get(id = meal["meal_id"]).price * meal["quantity"]
+            if 'meal_id' in meal:
+               order_total += Meal.objects.get(id = meal["meal_id"]).price * meal["quantity"]
+            if 'drink_id' in meal:
+               order_total += Drink.objects.get(id = meal["drink_id"]).price * meal[
         bill_amount = str(order_total)
 
         ## initialize a dictionary
