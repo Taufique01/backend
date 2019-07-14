@@ -5,7 +5,7 @@ from deploytodotaskerapp.models import Registration, \
     Customer, \
     Driver, \
     Order, \
-    OrderDetails
+    OrderDetails,Drink
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -33,7 +33,17 @@ class MealSerializer(serializers.ModelSerializer):
         model = Meal
         fields = ("id", "name", "short_description", "image", "price")
 
+class DrinkSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
 
+    def get_image(self, drink):
+        request = self.context.get('request')
+        image_url = drink.image.url
+        return request.build_absolute_uri(image_url)
+
+    class Meta:
+        model = Drink
+        fields = ("id", "name", "short_description", "image", "price")
 # ORDER SERIALIZER
 class OrderCustomerSerializer(serializers.ModelSerializer):
     name = serializers.ReadOnlyField(source="user.get_full_name")

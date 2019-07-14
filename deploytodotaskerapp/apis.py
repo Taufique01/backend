@@ -13,7 +13,7 @@ from django.utils.translation import get_language
 from deploytodotaskerapp.models import Registration, Meal, Order, OrderDetails, Driver,PaytmHistory,Customer,Drink
 from deploytodotaskerapp.serializers import RegistrationSerializer, \
     MealSerializer, \
-    OrderSerializer
+    OrderSerializer,DrinkSerializer
 from rest_auth.models import TokenModel
 #import stripe
 #from deploytodotasker.settings import STRIPE_API_KEY
