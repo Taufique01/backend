@@ -78,12 +78,11 @@ urlpatterns = [
     # APIs for CUSTOMERS
     url(r'^api/customer/registrations/$', apis.customer_get_registrations),
     url(r'^api/customer/meals/(?P<registration_id>\d+)/$', apis.customer_get_meals),
-    url(r'^api/customer/drinks/(?P<registration_id>\d+)/$', apis.customer_get_meals),
+    url(r'^api/customer/drinks/(?P<registration_id>\d+)/$', apis.customer_get_drinks),
     url(r'^api/customer/order/add/$', apis.customer_add_order),
     url(r'^api/paytm/response/', apis.response, name = 'responsetm'),
     url(r'^api/customer/order/latest/$', apis.customer_get_latest_order),
     url(r'^api/customer/driver/location/$', apis.customer_driver_location),
-
 
     # APIs for DRIVERS
     url(r'^api/driver/orders/ready/$', apis.driver_get_ready_orders),
