@@ -81,7 +81,7 @@ class Order(models.Model):
 
 class OrderDetails(models.Model):
     order = models.ForeignKey(Order, related_name='order_details', on_delete=models.CASCADE)
-    meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE,null=True)
     drink=models.ForeignKey(Drink, on_delete=models.CASCADE,null=True)
     quantity = models.IntegerField()
     sub_total = models.IntegerField()
